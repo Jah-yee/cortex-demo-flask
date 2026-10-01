@@ -26,7 +26,10 @@ def create_app():
 
     @app.get("/api/items")
     def list_items():
-        return jsonify(ITEMS)
+        if "category" not in request.args:
+            return jsonify(ITEMS)
+        category = request.args["category"]
+        return jsonify([i for i in ITEMS if i["tags"] == category])
 
     @app.get("/crash")
     def crash():
