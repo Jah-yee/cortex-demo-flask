@@ -28,4 +28,8 @@ def create_app():
     def list_items():
         return jsonify(ITEMS)
 
+    @app.get("/crash")
+    def crash():
+        raise RuntimeError("planted: cortex-demo-flask crash scenario")
+
     return app

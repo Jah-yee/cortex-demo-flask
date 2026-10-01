@@ -15,3 +15,9 @@ def test_list_items():
     r = client.get("/api/items")
     assert r.status_code == 200
     assert len(r.get_json()) == 5
+
+def test_crash_route_returns_500():
+    app = create_app()
+    client = app.test_client()
+    r = client.get("/crash")
+    assert r.status_code == 500
